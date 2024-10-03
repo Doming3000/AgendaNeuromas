@@ -1,0 +1,93 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+/* Página principal */
+header, footer {
+    align-items: center;
+    background-color: #7c3e81;
+    display: flex;
+    height: 50px;
+    user-select: none;
+}
+
+header h3 {
+    color: white;
+    margin-left: 15px;
+}
+
+/* Cuerpo */
+body {
+    background-color: #f9f9fc;
+}
+
+/* Formulario para ingresar pacientes */
+.formularioPaciente {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    padding: 20px;
+    user-select: none;
+    width: 400px;
+}
+
+.formularioPaciente h2 {
+    text-align: center;
+}
+
+.formularioPaciente label, .formularioPaciente input, .formularioPaciente select {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+.formularioPaciente input[type="text"], .formularioPaciente input[type="email"], .formularioPaciente select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding: 8px;
+}
+
+.formularioPaciente input[type="email"]::placeholder {
+    text-transform: none;
+}
+
+.formularioPaciente input[type="email"] {
+    text-transform: lowercase;
+}
+
+.prevision option[value="none"] {
+    display: none;
+}
+
+.formularioPaciente input[type="submit"] {
+    background-color: #4CAF50;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.formularioPaciente input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.formularioPaciente p {
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.formularioPaciente p:hover {
+    color: royalblue;
+}

@@ -1,0 +1,29 @@
+.calendar {
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 200px 0 200px;
+    user-select: none;
+}
+
+/* Por cada celda */
+.fc-daygrid-day:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.fc-daygrid-day {
+    transition: background-color 0.3s ease;
+}
+
+/* Vista de semana y día */
+.fc-timegrid-slot:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.fc-timegrid-slot {
+    transition: background-color 0.3s ease;
+}
