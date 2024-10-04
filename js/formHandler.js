@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
           title: 'Paciente registrado',
           text: data.message
         });
+        
         closeForm();
       } else {
         Swal.fire({
