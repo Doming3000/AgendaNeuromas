@@ -19,7 +19,6 @@
     
     <!-- Dependencias -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -27,8 +26,13 @@
         <h3>Agenda Neuromás</h3>
     </header>
     
-    <form class="formularioPaciente" id="formPaciente" action="php/procesar.php" method="POST">
-        <h2>Registar paciente</h2><br>
+    <button onclick="openForm()">Abrir formulario</button>
+    
+    <div id="overlay" class="overlay" style="display:none;"></div>
+    
+    <!-- Formulario dentro del modal -->
+    <form class="formularioPaciente" id="formPaciente" action="php/procesar.php" method="POST" style="display:none">
+        <h2>Registrar paciente</h2><br>
         
         <label for="nombre">Nombre del paciente:</label>
         <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" maxlength="50" required>
@@ -44,8 +48,8 @@
         
         <!-- Menú de selección de previsión -->
         <label for="prevision">Previsión del paciente:</label>
-        <select class="prevision" id="prevision" name="prevision" required>
-            <option value="none">Seleccione una opción</option>
+        <select id="prevision" name="prevision" required>
+            <option value="none" disabled selected>Seleccione una opción</option>
             <option value="Fonasa">Fonasa</option>
             <option value="Isapre">Isapre</option>
             <option value="Particular">Particular</option>
@@ -55,9 +59,11 @@
         <input type="submit" value="Registrar">
         
         <p>¿Necesitas ayuda?</p>
+        
+        <button type="button" onclick="closeForm()">Cancelar</button>
     </form>
     
     <!-- Calendario -->
-    <div class="calendar" id='calendar'></div>
+    <!-- <div class="calendar" id='calendar'></div> -->
 </body>
 </html>
