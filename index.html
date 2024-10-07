@@ -30,7 +30,13 @@
     
     <div id="overlay" class="overlay" style="display:none;"></div>
     
-    <!-- Formulario dentro del modal -->
+    <form class="horaModal" id="horaModal" style="display:none">
+        <h3></h3> <!-- Texto presente en js/calendar.js ln 25 -->
+        <input type="time">
+        <button>aceptar</button>
+    </form>
+    
+    <!-- Formulario de prueba para registrar un paciente. -->
     <form class="formularioPaciente" id="formPaciente" action="php/procesar.php" method="POST" style="display:none">
         <h2>Registrar paciente</h2><br>
         
@@ -41,10 +47,10 @@
         <input type="text" id="rut" name="rut" placeholder="Sin puntos con guion" maxlength="10" required>
         
         <label for="correo">Correo del paciente:</label>
-        <input type="email" id="correo" name="correo" placeholder="Correo electrónico" maxlength="320" required>
+        <input type="email" id="correo" name="correo" placeholder="nombre@dominio.com" maxlength="320" required>
         
         <label for="telefono">Teléfono del paciente:</label>
-        <input type="text" id="telefono" name="telefono" placeholder="Número de teléfono" maxlength="12" required>
+        <input type="text" id="telefono" name="telefono" placeholder="123456789" maxlength="9" required>
         
         <!-- Menú de selección de previsión -->
         <label for="prevision">Previsión del paciente:</label>

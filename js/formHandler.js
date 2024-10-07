@@ -1,13 +1,20 @@
-// Funciones para abrir y cerrar el formulario
+// Función para abrir el formulario y mostrar el overlay
 function openForm() {
   document.getElementById("formPaciente").style.display = "block";
   document.getElementById("overlay").style.display = "block";
+  
+  document.body.classList.add("no-interaction");
 }
 
+// Función para cerrar el formulario y ocultar el overlay
 function closeForm() {
   document.getElementById("formPaciente").style.display = "none";
   document.getElementById("overlay").style.display = "none";
   
+  // Remover la clase para habilitar la interacción del fondo
+  document.body.classList.remove("no-interaction");
+  
+  // Reiniciar el formulario
   document.getElementById("formPaciente").reset();
 }
 
@@ -54,6 +61,11 @@ function validarRut(rut) {
   
   return validacion;
 }
+
+// Solo permitir números en input de teléfono
+document.getElementById('telefono').addEventListener('input', function(e) {
+  this.value = this.value.replace(/[^0-9]/g, '');
+});
 
 // Ejecutar una vez que el documento esté completamente cargado
 document.addEventListener("DOMContentLoaded", function() {

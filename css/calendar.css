@@ -4,6 +4,7 @@
     padding: 10px;
     margin: 5px 200px 0 200px;
     user-select: none;
+    /* display: none; */
 }
 
 /* Por cada celda */
