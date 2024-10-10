@@ -27,6 +27,7 @@ body {
 
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
+    display: none;
     height: 100%;
     left: 0;
     position: fixed;
@@ -40,42 +41,101 @@ body {
 }
 
 /* Estilos del modal */
-.horaModal {
-    background-color: #f9f9fc;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    left: 50%;
-    padding: 20px;
-    pointer-events: auto;
+.agendarModal {
+    display: none;
     position: fixed;
     top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    user-select: none;
-    width: 600px;
+    width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     z-index: 3;
+    pointer-events: all;
+    user-select: none;
 }
 
-.horaModal h3 {
+/* Título del modal */
+.agendarModal h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
     text-align: center;
 }
 
-.horaModal button {
-    background-color: #4CAF50;
-    border-radius: 5px;
+/* Estilo para etiquetas */
+.agendarModal label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Campos de entrada */
+.agendarModal input[type="time"],
+.agendarModal select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+/* Input de hora y select de servicio al pasar el mouse */
+.agendarModal input[type="time"]:focus,
+.agendarModal select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botones dentro del contenedor */
+.agendarModal .buttonContainer button,
+.agendarModal .buttonContainer input[type="submit"] {
+    padding: 10px;
+    font-size: 0.9rem;
     border: none;
-    color: white;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    padding: 10px 20px;
-    text-align: center;
+    transition: background-color 0.3s;
 }
 
-.horaModal button:hover {
-    background-color: #45a049;
+/* Botón de cerrar */
+.agendarModal .buttonContainer button#closeButton {
+    background-color: #dc3545;
+    color: white;
 }
 
-.formularioPaciente {
+/* Botón de agendar */
+.agendarModal .buttonContainer input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Efecto hover en los botones */
+.agendarModal .buttonContainer button#closeButton:hover {
+    background-color: #c82333;
+}
+
+.agendarModal .buttonContainer input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Contenedor de botones y botones */
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+/* -------- */
+/* .formularioPaciente {
     background-color: #f9f9fc;
     border-radius: 10px;
     border: 1px solid #ccc;
@@ -118,10 +178,6 @@ body {
     text-transform: lowercase;
 }
 
-.prevision option[value="none"] {
-    display: none;
-}
-
 .formularioPaciente input[type="submit"] {
     background-color: #4CAF50;
     border-radius: 5px;
@@ -145,4 +201,4 @@ body {
 
 .formularioPaciente p:hover {
     color: royalblue;
-}
+} */

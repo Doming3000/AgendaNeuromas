@@ -11,62 +11,45 @@
     
     <!-- Javascript -->
     <script src="js/calendar.js"></script>
-    <script src="js/formHandler.js" defer></script>
-    
-    <!-- Iconos -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="js/calendarModal.js"></script>
     
     <!-- Dependencias -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <header>
         <h3>Agenda Neuromás</h3>
     </header>
     
-    <button onclick="openForm()">Abrir formulario</button>
+    <!-- Overlay para ventanas tipo modal -->
+    <div id="overlay" class="overlay"></div>
     
-    <div id="overlay" class="overlay" style="display:none;"></div>
+    <!-- Modal cuando se selecciona una fecha -->
+    <div class="fechaSeleccionada" id="fechaSeleccionada">
+        <h3>Fecha</h3>
+        <hr>
+        <!-- Botón para mostrar formulario para agendar una hora -->
+        <button type="button" id="agendarButton">Agendar una hora</button>
+        <!-- Botón para cerrar el modal -->
+        <button class="closeButton" id="closeButton">Cerrar</button>
+    </div>
     
-    <form class="horaModal" id="horaModal" style="display:none">
-        <h3></h3> <!-- Texto presente en js/calendar.js ln 25 -->
-        <input type="time">
-        <button>aceptar</button>
-    </form>
-    
-    <!-- Formulario de prueba para registrar un paciente. -->
-    <form class="formularioPaciente" id="formPaciente" action="php/procesar.php" method="POST" style="display:none">
-        <h2>Registrar paciente</h2><br>
+    <!-- Formulario para agendar una hora -->
+    <form class="agendarModal" id="agendarModal" action="php/agendarHora.php" method="POST" >
+        <h3>Fecha</h3>
         
-        <label for="nombre">Nombre del paciente:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" maxlength="50" required>
+        <!-- Input oculto para la fecha (Manejado mediante variables)-->
+        <input type="hidden" id="fecha" name="fecha">
         
-        <label for="rut">RUT del paciente:</label>
-        <input type="text" id="rut" name="rut" placeholder="Sin puntos con guion" maxlength="10" required>
+        <!-- Input de hora -->
+        <label for="hora">Seleccione la hora de inicio:</label>
+        <input type="time" id="hora" name="hora" required>
         
-        <label for="correo">Correo del paciente:</label>
-        <input type="email" id="correo" name="correo" placeholder="nombre@dominio.com" maxlength="320" required>
-        
-        <label for="telefono">Teléfono del paciente:</label>
-        <input type="text" id="telefono" name="telefono" placeholder="123456789" maxlength="9" required>
-        
-        <!-- Menú de selección de previsión -->
-        <label for="prevision">Previsión del paciente:</label>
-        <select id="prevision" name="prevision" required>
-            <option value="none" disabled selected>Seleccione una opción</option>
-            <option value="Fonasa">Fonasa</option>
-            <option value="Isapre">Isapre</option>
-            <option value="Particular">Particular</option>
-            <option value="Convenio">Convenio</option>
-        </select>
-        
-        <input type="submit" value="Registrar">
-        
-        <p>¿Necesitas ayuda?</p>
-        
-        <button type="button" onclick="closeForm()">Cancelar</button>
+        <!-- Contenedor de botones -->
+        <div class="buttonContainer">
+            <button type="button" id="closeFormButton">Cancelar</button>
+            <input type="submit" value="Agendar">
+        </div>
     </form>
     
     <!-- Calendario -->
