@@ -8,6 +8,7 @@
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="css/calendarModal.css">
     
     <!-- Javascript -->
     <script src="js/calendar.js"></script>
@@ -28,10 +29,13 @@
     <div class="fechaSeleccionada" id="fechaSeleccionada">
         <h3>Fecha</h3>
         <hr>
-        <!-- Botón para mostrar formulario para agendar una hora -->
-        <button type="button" id="agendarButton">Agendar una hora</button>
-        <!-- Botón para cerrar el modal -->
-        <button class="closeButton" id="closeButton">Cerrar</button>
+        <p>No tienes nada para hoy</p>
+        
+        <!-- Contenedor de botones -->
+        <div class="buttonContainer">
+            <button type="button" id="agendarButton">Agendar una hora</button>
+            <button class="closeButton" id="closeButton">Cerrar</button>
+        </div>
     </div>
     
     <!-- Formulario para agendar una hora -->
@@ -41,13 +45,31 @@
         <!-- Input oculto para la fecha (Manejado mediante variables)-->
         <input type="hidden" id="fecha" name="fecha">
         
-        <!-- Input de hora -->
-        <label for="hora">Seleccione la hora de inicio:</label>
-        <input type="time" id="hora" name="hora" required>
+        <!-- Input de hora de inicio-->
+        <label for="horaInicio">Seleccione la hora de inicio:</label>
+        <input type="time" id="horaInicio" name="horaInicio" required>
+        
+        <!-- Input de hora de fin-->
+        <label for="horaFin">Seleccione la hora de fin:</label>
+        <input type="time" id="horaFin" name="horaFin" required>
+        
+        <!-- Selector de paciente -->
+        <label for="paciente">Nombre del paciente:</label>
+        <select id="paciente" name="paciente" required>
+            <option value="none" disabled selected>Seleccione una opción</option>
+            <option value="1">Paciente 1</option>
+        </select>
+        
+        <!-- Selector de profesional -->
+        <label for="profesional">Nombre del profesional:</label>
+        <select id="profesional" name="profesional" required>
+            <option value="none" disabled selected>Seleccione una opción</option>
+            <option value="1">Profesional 1</option>
+        </select>
         
         <!-- Contenedor de botones -->
         <div class="buttonContainer">
-            <button type="button" id="closeFormButton">Cancelar</button>
+            <button class="closeButton" type="button" id="closeFormButton">Cancelar</button>
             <input type="submit" value="Agendar">
         </div>
     </form>

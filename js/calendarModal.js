@@ -2,14 +2,25 @@ document.addEventListener('DOMContentLoaded', function() {
   // Variable para almacenar la fecha seleccionada
   let selectedDate;
   
-  // Escuchar el evento personalizado 'dateSelected' para mostrar el modal con la fecha seleccionada
-  document.addEventListener('dateSelected', function(event) {
+  // Manejo de eventos personalizados
+  document.addEventListener('dateSelected', handleDateSelected);
+  
+  // Manejo de botones de interacción
+  document.getElementById('closeButton').addEventListener('click', closeModal);
+  document.getElementById('agendarButton').addEventListener('click', openAgendarModal);
+  document.getElementById('closeFormButton').addEventListener('click', closeForm);
+  
+  // Manejo del envío del formulario
+  document.getElementById('agendarModal').addEventListener('submit', handleFormSubmit);
+  
+  // Funciones para manejo de eventos
+  function handleDateSelected(event) {
     const dateFormatted = event.detail.dateFormatted;
     selectedDate = event.detail.date;
     
     // Mostrar overlay y modal con la fecha seleccionada
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById('fechaSeleccionada').style.display = 'block';
+    toggleOverlay(true);
+    toggleModal('fechaSeleccionada', true);
     
     // Añadir clase para evitar la interacción con el fondo
     document.body.classList.add('no-interaction');
@@ -18,26 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const formattedDate = selectedDate.toISOString().split('T')[0];
     document.getElementById('fecha').value = formattedDate;
     document.querySelector('.fechaSeleccionada h3').textContent = dateFormatted;
-  });
+  }
   
-  // Cerrar modal de fecha seleccionada
-  document.getElementById('closeButton').addEventListener('click', function() {
-    closeModal();
-  });
-  
-  // Abrir formulario para agendar una hora
-  document.getElementById('agendarButton').addEventListener('click', function() {
-    document.getElementById('fechaSeleccionada').style.display = 'none';
-    document.getElementById('agendarModal').style.display = 'block';
-  });
-  
-  // Cerrar formulario de agendar
-  document.getElementById('closeFormButton').addEventListener('click', function() {
-    closeForm();
-  });
-  
-  // Manejar el envío del formulario de agendar usando fetch
-  document.getElementById('agendarModal').addEventListener('submit', function(event) {
+  function handleFormSubmit(event) {
     event.preventDefault();
     
     const formData = new FormData(this);
@@ -47,32 +41,50 @@ document.addEventListener('DOMContentLoaded', function() {
       method: 'POST',
       body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => {
-      // Comprobar la respuesta del servidor
       if (data.status === "success") {
         alert('Hora agendada con éxito');
         closeForm();
       } else {
-        alert('Ha ocurrido un error al agendar la hora');
+        alert('Ha ocurrido un error: ' + data.message);
       }
     })
     .catch(error => {
-      alert('Ha ocurrido un error al agendar la hora');
+      console.error('Error en el fetch:', error);
+      alert('Ha ocurrido un error inesperado. Consulte la consola para más detalles.');
     });
-  });
+  }
   
-  // Función para cerrar el modal de fecha seleccionada
+  // Funciones de control de modales y formularios
+  function openAgendarModal() {
+    toggleModal('fechaSeleccionada', false);
+    toggleModal('agendarModal', true);
+  }
+  
   function closeModal() {
-    document.getElementById('overlay').style.display = 'none';
-    document.getElementById('fechaSeleccionada').style.display = 'none';
+    toggleOverlay(false);
+    toggleModal('fechaSeleccionada', false);
     document.body.classList.remove('no-interaction');
   }
   
-  // Función para cerrar el formulario de agendar
   function closeForm() {
-    document.getElementById('agendarModal').style.display = 'none';
-    document.getElementById('fechaSeleccionada').style.display = 'block';
+    toggleModal('agendarModal', false);
+    toggleModal('fechaSeleccionada', true);
     document.getElementById('agendarModal').reset();
+  }
+  
+  // Funciones auxiliares
+  function toggleOverlay(show) {
+    document.getElementById('overlay').style.display = show ? 'block' : 'none';
+  }
+  
+  function toggleModal(modalId, show) {
+    document.getElementById(modalId).style.display = show ? 'block' : 'none';
   }
 });
