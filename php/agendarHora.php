@@ -22,8 +22,22 @@ $fecha = $_POST['fecha'] ?? null;
 
 // Validar que los datos no estén vacíos
 if (empty($hora_inicio) || empty($hora_fin) || empty($fecha)) {
-    // Enviar respuesta JSON en caso de error por datos faltantes
-    echo json_encode(["status" => "error", "message" => "Error: falta la fecha, hora de inicio o hora de fin."]);
+    echo json_encode(["status" => "error", "message" => "Error: Falta la hora de inicio u hora de fin."]);
+    exit;
+}
+
+// Convertir las horas a minutos desde la medianoche para validarlas
+function convertirHoraAMinutos($hora) {
+    list($horas, $minutos) = explode(':', $hora);
+    return $horas * 60 + $minutos;
+}
+
+$minutos_inicio = convertirHoraAMinutos($hora_inicio);
+$minutos_fin = convertirHoraAMinutos($hora_fin);
+
+// Verificar que la hora de inicio sea anterior a la hora de fin
+if ($minutos_inicio >= $minutos_fin) {
+    echo json_encode(["status" => "error", "message" => "Error: La hora de inicio debe ser anterior a la hora de fin."]);
     exit;
 }
 
@@ -33,7 +47,6 @@ $stmt = $conn->prepare($sql);
 
 // Verificar si la preparación de la consulta fue exitosa
 if ($stmt === false) {
-    // Enviar respuesta JSON en caso de error en la preparación de la consulta
     echo json_encode(["status" => "error", "message" => "Error en la preparación de la consulta: " . $conn->error]);
     exit;
 }
@@ -44,14 +57,11 @@ $stmt->execute();
 
 // Verificar si la consulta fue exitosa
 if ($stmt->affected_rows > 0) {
-    // Enviar respuesta JSON de éxito
     echo json_encode(["status" => "success", "message" => "Hora agendada con éxito."]);
 } else {
-    // Enviar respuesta JSON en caso de error al agendar
     echo json_encode(["status" => "error", "message" => "Error al agendar la hora: " . $stmt->error]);
 }
 
 // Cerrar la conexión
 $stmt->close();
 $conn->close();
-?>

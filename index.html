@@ -13,6 +13,7 @@
     <!-- Javascript -->
     <script src="js/calendar.js"></script>
     <script src="js/calendarModal.js"></script>
+    <script src="js/timepicker.js"></script>
     
     <!-- Dependencias -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
@@ -28,30 +29,55 @@
     <!-- Modal cuando se selecciona una fecha -->
     <div class="fechaSeleccionada" id="fechaSeleccionada">
         <h3>Fecha</h3>
-        <hr>
-        <p>No tienes nada para hoy</p>
+        <p>No tienes nada para este día</p>
+        
+        <div>
+            <!-- Contenedor que contenga las horas registradas -->
+        </div>
         
         <!-- Contenedor de botones -->
         <div class="buttonContainer">
-            <button type="button" id="agendarButton">Agendar una hora</button>
             <button class="closeButton" id="closeButton">Cerrar</button>
+            <button class="submitButton" type="button" id="agendarButton">Agendar una hora</button>
         </div>
     </div>
     
     <!-- Formulario para agendar una hora -->
-    <form class="agendarModal" id="agendarModal" action="php/agendarHora.php" method="POST" >
+    <form class="agendarModal" id="agendarModal" action="php/agendarHora.php" method="POST">
         <h3>Fecha</h3>
         
-        <!-- Input oculto para la fecha (Manejado mediante variables)-->
+        <!-- Input oculto para la fecha (Manejado mediante variables) -->
         <input type="hidden" id="fecha" name="fecha">
         
-        <!-- Input de hora de inicio-->
-        <label for="horaInicio">Seleccione la hora de inicio:</label>
-        <input type="time" id="horaInicio" name="horaInicio" required>
+        <div class="timepickerContainer">
+            <!-- Selector personalizado de hora de inicio -->
+            <label for="customTimePickerInicio">Seleccione la hora de inicio:</label>
+            <div id="customTimePickerInicio" class="custom-time-picker">
+                <div class="selected-time">
+                    <span id="selectedTimeDisplayInicio">--:--</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="time-dropdown" id="timeDropdownInicio"></div>
+            </div>
+            
+            <!-- Input oculto para la hora de inicio (manejado mediante js) -->
+            <input type="hidden" id="horaInicio" name="horaInicio">
+        </div>
         
-        <!-- Input de hora de fin-->
-        <label for="horaFin">Seleccione la hora de fin:</label>
-        <input type="time" id="horaFin" name="horaFin" required>
+        <div class="timepickerContainer">
+            <!-- Selector personalizado de hora de fin -->
+            <label for="customTimePickerFin">Seleccione la hora de fin:</label>
+            <div id="customTimePickerFin" class="custom-time-picker">
+                <div class="selected-time">
+                    <span id="selectedTimeDisplayFin">--:--</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="time-dropdown" id="timeDropdownFin"></div>
+            </div>
+            
+            <!-- Input oculto para la hora de fin (manejado mediante js)-->
+            <input type="hidden" id="horaFin" name="horaFin">
+        </div>
         
         <!-- Selector de paciente -->
         <label for="paciente">Nombre del paciente:</label>
@@ -70,7 +96,7 @@
         <!-- Contenedor de botones -->
         <div class="buttonContainer">
             <button class="closeButton" type="button" id="closeFormButton">Cancelar</button>
-            <input type="submit" value="Agendar">
+            <input class="submitButton" type="submit" value="Agendar">
         </div>
     </form>
     

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
       today.setHours(0, 0, 0, 0); 
       
       if (info.date < today) {
-        alert("Esta fecha ya pasó. Seleccione una fecha posterior.");
+        alert("La fecha seleccionada ya pasó. Por favor, elija una fecha posterior.");
       } else {
         // Crear una fecha en el formato deseado
         var formatOptions = { day: 'numeric', month: 'long', year: 'numeric' };

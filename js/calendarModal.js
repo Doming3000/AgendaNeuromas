@@ -1,6 +1,8 @@
+// Variables globales para almacenar la fecha seleccionada y la fecha formateada
+let selectedDate;
+let dateFormatted; // Definir dateFormatted de forma global
+
 document.addEventListener('DOMContentLoaded', function() {
-  // Variable para almacenar la fecha seleccionada
-  let selectedDate;
   
   // Manejo de eventos personalizados
   document.addEventListener('dateSelected', handleDateSelected);
@@ -15,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Funciones para manejo de eventos
   function handleDateSelected(event) {
-    const dateFormatted = event.detail.dateFormatted;
+    // Actualizar las variables globales
+    dateFormatted = event.detail.dateFormatted;
     selectedDate = event.detail.date;
     
     // Mostrar overlay y modal con la fecha seleccionada
@@ -29,6 +32,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const formattedDate = selectedDate.toISOString().split('T')[0];
     document.getElementById('fecha').value = formattedDate;
     document.querySelector('.fechaSeleccionada h3').textContent = dateFormatted;
+  }
+  
+  function openAgendarModal() {
+    toggleModal('fechaSeleccionada', false);
+    toggleModal('agendarModal', true);
+    
+    document.querySelector('.agendarModal h3').textContent = `Agendar hora para el ${dateFormatted}`;
   }
   
   function handleFormSubmit(event) {
@@ -52,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Hora agendada con éxito');
         closeForm();
       } else {
+        // Mostrar mensaje de error del servidor
         alert('Ha ocurrido un error: ' + data.message);
       }
     })
@@ -62,11 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Funciones de control de modales y formularios
-  function openAgendarModal() {
-    toggleModal('fechaSeleccionada', false);
-    toggleModal('agendarModal', true);
-  }
-  
   function closeModal() {
     toggleOverlay(false);
     toggleModal('fechaSeleccionada', false);
