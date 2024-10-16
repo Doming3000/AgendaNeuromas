@@ -13,6 +13,7 @@
     <!-- Javascript -->
     <script src="js/calendar.js"></script>
     <script src="js/calendarModal.js"></script>
+    <script src="js/modalSelect.js"></script>
     <script src="js/timepicker.js"></script>
     
     <!-- Dependencias -->
@@ -29,10 +30,10 @@
     <!-- Modal cuando se selecciona una fecha -->
     <div class="fechaSeleccionada" id="fechaSeleccionada">
         <h3>Fecha</h3>
-        <p>No tienes nada para este día</p>
         
-        <div>
-            <!-- Contenedor que contenga las horas registradas -->
+        <!-- Contenedor de horas registradas para el día-->
+        <div class="horaContainer">
+            <p>No tienes nada para este día</p>
         </div>
         
         <!-- Contenedor de botones -->
@@ -83,14 +84,12 @@
         <label for="paciente">Nombre del paciente:</label>
         <select id="paciente" name="paciente" required>
             <option value="none" disabled selected>Seleccione una opción</option>
-            <option value="1">Paciente 1</option>
         </select>
         
         <!-- Selector de profesional -->
-        <label for="profesional">Nombre del profesional:</label>
+        <label for="profesional">Nombre del profesional encargado:</label>
         <select id="profesional" name="profesional" required>
             <option value="none" disabled selected>Seleccione una opción</option>
-            <option value="1">Profesional 1</option>
         </select>
         
         <!-- Contenedor de botones -->

@@ -1,28 +1,18 @@
 <?php
-// Datos de conexión a MySQL
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "agendaneuromas";
-
-// Crear la conexión
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    // Enviar respuesta JSON en caso de error de conexión
-    echo json_encode(["status" => "error", "message" => "Conexión fallida: " . $conn->connect_error]);
-    exit;
-}
+// Incluir el archivo de configuración de la base de datos
+require_once 'config.php';
 
 // Recibir los datos del formulario
 $hora_inicio = $_POST['horaInicio'] ?? null;
 $hora_fin = $_POST['horaFin'] ?? null;
 $fecha = $_POST['fecha'] ?? null;
+$paciente_id = $_POST['paciente'] ?? null;
+$profesional_id = $_POST['profesional'] ?? null;
 
 // Validar que los datos no estén vacíos
-if (empty($hora_inicio) || empty($hora_fin) || empty($fecha)) {
-    echo json_encode(["status" => "error", "message" => "Error: Falta la hora de inicio u hora de fin."]);
+if (empty($hora_inicio) || empty($hora_fin) || empty($fecha) || $paciente_id === 'none' || $profesional_id === 'none') {
+    // Enviar solo el mensaje de error sin prefijo
+    echo json_encode(["status" => "error", "message" => "Debe completar todos los campos"]);
     exit;
 }
 
@@ -41,18 +31,18 @@ if ($minutos_inicio >= $minutos_fin) {
     exit;
 }
 
-// Insertar los datos en la tabla 'horas'
-$sql = "INSERT INTO horas (fecha_hora, hora_inicio, hora_fin) VALUES (?, ?, ?)";
+// Insertar los datos en la tabla 'horas' con los IDs de paciente y profesional
+$sql = "INSERT INTO horas (fecha_hora, hora_inicio, hora_fin, paciente, profesional) 
+        VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 
-// Verificar si la preparación de la consulta fue exitosa
 if ($stmt === false) {
     echo json_encode(["status" => "error", "message" => "Error en la preparación de la consulta: " . $conn->error]);
     exit;
 }
 
 // Vincular los parámetros y ejecutar la consulta
-$stmt->bind_param("sss", $fecha, $hora_inicio, $hora_fin);
+$stmt->bind_param("sssss", $fecha, $hora_inicio, $hora_fin, $paciente_id, $profesional_id);
 $stmt->execute();
 
 // Verificar si la consulta fue exitosa
@@ -65,3 +55,4 @@ if ($stmt->affected_rows > 0) {
 // Cerrar la conexión
 $stmt->close();
 $conn->close();
+?>

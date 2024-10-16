@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         closeForm();
       } else {
         // Mostrar mensaje de error del servidor
-        alert('Ha ocurrido un error: ' + data.message);
+        alert(data.message);
       }
     })
     .catch(error => {
