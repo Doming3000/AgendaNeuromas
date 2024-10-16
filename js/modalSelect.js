@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Función que abre el modal de agendar
   document.getElementById('agendarButton').addEventListener('click', function() {
-    // Llamamos a la función para obtener los pacientes y profesionales cuando se abre el modal
+    
     fetchPacientes();
     fetchProfesionales();
     
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Función para obtener los pacientes de la base de datos
   function fetchPacientes() {
-    fetch('php/obtenerPacientes.php')  // Ruta del archivo PHP que consulta los pacientes
+    fetch('php/obtenerPacientes.php')
     .then(response => response.json())
     .then(data => {
       if (data.status === 'success') {
@@ -39,12 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Función para obtener los profesionales de la base de datos
   function fetchProfesionales() {
-    fetch('php/obtenerProfesionales.php')  // Ruta del archivo PHP que consulta los profesionales
+    fetch('php/obtenerProfesionales.php')
     .then(response => response.json())
     .then(data => {
       if (data.status === 'success') {
         const profesionales = data.profesionales;
-        const profesionalSelect = document.getElementById('profesional');  // Usar el id correcto para el select
+        const profesionalSelect = document.getElementById('profesional');
         
         // Limpiar las opciones existentes, excepto la primera
         profesionalSelect.innerHTML = '<option value="none" disabled selected>Seleccione una opción</option>';

@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // Evento para seleccionar la hora
         opcion.addEventListener('click', function() {
-          selectedTimeDisplay.textContent = `${horaFormateada}:${minutoFormateado}`; // Mostrar hora seleccionada
+          selectedTimeDisplay.textContent = `${horaFormateada}:${minutoFormateado}`;
           hiddenTimeInput.value = `${horaFormateada}:${minutoFormateado}`;
           cerrarMenu(timeDropdown);
         });

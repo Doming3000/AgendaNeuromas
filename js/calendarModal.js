@@ -1,6 +1,6 @@
 // Variables globales para almacenar la fecha seleccionada y la fecha formateada
 let selectedDate;
-let dateFormatted; // Definir dateFormatted de forma global
+let dateFormatted;
 
 document.addEventListener('DOMContentLoaded', function() {
   
@@ -43,6 +43,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function handleFormSubmit(event) {
     event.preventDefault();
+    
+    const paciente = document.getElementById('paciente').value;
+    const profesional = document.getElementById('profesional').value;
+    
+    // Comprobar si los select están "vacios"
+    if (paciente === 'none' || profesional === 'none') {
+      alert('Debe completar todos los campos');
+      return;
+    }
     
     const formData = new FormData(this);
     

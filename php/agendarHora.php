@@ -9,9 +9,8 @@ $fecha = $_POST['fecha'] ?? null;
 $paciente_id = $_POST['paciente'] ?? null;
 $profesional_id = $_POST['profesional'] ?? null;
 
-// Validar que los datos no estén vacíos
-if (empty($hora_inicio) || empty($hora_fin) || empty($fecha) || $paciente_id === 'none' || $profesional_id === 'none') {
-    // Enviar solo el mensaje de error sin prefijo
+// Validar que las horas estén seleccionadas
+if (empty($hora_inicio) || empty($hora_fin)) {
     echo json_encode(["status" => "error", "message" => "Debe completar todos los campos"]);
     exit;
 }
