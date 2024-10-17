@@ -12,7 +12,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     user-select: none;
-    width: 500px;
+    width: 460px;
     z-index: 3;
 }
 
@@ -42,8 +42,7 @@ hr {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    margin: 5px 0 10px 0;
     width: 100%;
 }
 
@@ -59,7 +58,6 @@ hr {
     color: white;
     cursor: pointer;
     font-size: 1rem;
-    /* margin-top: 10px; */
     padding: 8px;
     transition: background-color 0.3s ease;
 }
@@ -73,22 +71,32 @@ hr {
 }
 
 .closeButton:hover {
-    background-color: #c62e2e; /* Revisar después */
+    background-color: #ce3737;
 }
 
-/* ----- Estilo para el selector personalizado de hora ----- */
+/* ---- ---- ---- */
+
+/* Contenedor principal que agrupa ambos selectores uno al lado del otro */
+.timepickers-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+/* Contenedor de cada selector individual (con label encima) */
 .timepickerContainer {
     display: flex;
-    margin-bottom: 10px;
+    flex-direction: column;
+    width: 120px;
 }
 
+/* Selector personalizado de hora */
 .custom-time-picker {
-    display: inline-block;
     position: relative;
-    text-wrap: nowrap;
-    width: 110px;
+    width: 90%;
+    margin-bottom: 30px;
 }
 
+/* Estilos del área seleccionada */
 .selected-time {
     background-color: #fff;
     padding: 10px;
@@ -100,8 +108,8 @@ hr {
     align-items: center;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    margin-top: 5px;
 }
-
 
 /* Desplegable de selección de horas */
 .time-dropdown {
@@ -140,3 +148,9 @@ hr {
 .custom-time-picker.active .arrow {
     transform: rotate(180deg);
 }
+
+#duracionSesion {
+    font-size: 0.8rem;
+    position: fixed;
+    margin-top: -25px;
+}  

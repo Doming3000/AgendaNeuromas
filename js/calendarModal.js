@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (data.status === "success") {
         alert('Hora agendada con éxito');
         closeForm();
+        resetTimePickers();
       } else {
         // Mostrar mensaje de error del servidor
         alert(data.message);

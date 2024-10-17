@@ -18,6 +18,7 @@
     
     <!-- Dependencias -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script src="https://kit.fontawesome.com/24f0e9fe41.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -50,35 +51,39 @@
         <!-- Input oculto para la fecha (Manejado mediante variables) -->
         <input type="hidden" id="fecha" name="fecha">
         
-        <div class="timepickerContainer">
-            <!-- Selector personalizado de hora de inicio -->
-            <label for="customTimePickerInicio">Seleccione la hora de inicio:</label>
-            <div id="customTimePickerInicio" class="custom-time-picker">
-                <div class="selected-time">
-                    <span id="selectedTimeDisplayInicio">--:--</span>
-                    <span class="arrow">▼</span>
+        <div class="timepickers-wrapper">
+            <div class="timepickerContainer">
+                <!-- Selector personalizado de hora de inicio -->
+                <label for="customTimePickerInicio">Hora de inicio:</label>
+                <div id="customTimePickerInicio" class="custom-time-picker">
+                    <div class="selected-time">
+                        <span id="selectedTimeDisplayInicio">--:--</span>
+                        <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
+                    </div>
+                    <div class="time-dropdown" id="timeDropdownInicio"></div>
                 </div>
-                <div class="time-dropdown" id="timeDropdownInicio"></div>
+                
+                <!-- Input oculto para la hora de inicio (manejado mediante js) -->
+                <input type="hidden" id="horaInicio" name="horaInicio">
             </div>
             
-            <!-- Input oculto para la hora de inicio (manejado mediante js) -->
-            <input type="hidden" id="horaInicio" name="horaInicio">
+            <div class="timepickerContainer">
+                <!-- Selector personalizado de hora de fin -->
+                <label for="customTimePickerFin">Hora de fin:</label>
+                <div id="customTimePickerFin" class="custom-time-picker">
+                    <div class="selected-time">
+                        <span id="selectedTimeDisplayFin">--:--</span>
+                        <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
+                    </div>
+                    <div class="time-dropdown" id="timeDropdownFin"></div>
+                </div>
+                
+                <!-- Input oculto para la hora de fin (manejado mediante js)-->
+                <input type="hidden" id="horaFin" name="horaFin">
+            </div>
         </div>
         
-        <div class="timepickerContainer">
-            <!-- Selector personalizado de hora de fin -->
-            <label for="customTimePickerFin">Seleccione la hora de fin:</label>
-            <div id="customTimePickerFin" class="custom-time-picker">
-                <div class="selected-time">
-                    <span id="selectedTimeDisplayFin">--:--</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="time-dropdown" id="timeDropdownFin"></div>
-            </div>
-            
-            <!-- Input oculto para la hora de fin (manejado mediante js)-->
-            <input type="hidden" id="horaFin" name="horaFin">
-        </div>
+        <p id="duracionSesion" style="display: none;"></p>
         
         <!-- Selector de paciente -->
         <label for="paciente">Nombre del paciente:</label>
@@ -87,7 +92,7 @@
         </select>
         
         <!-- Selector de profesional -->
-        <label for="profesional">Nombre del profesional encargado:</label>
+        <label for="profesional">Profesional encargado:</label>
         <select id="profesional" name="profesional" required>
             <option value="none" disabled selected>Seleccione una opción</option>
         </select>

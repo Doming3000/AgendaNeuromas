@@ -1,5 +1,4 @@
 <?php
-// Incluir el archivo de configuración con los datos de conexión
 require_once 'config.php';
 
 // Consulta para obtener los nombres de los profesionales

@@ -1,5 +1,4 @@
 <?php
-// Incluir el archivo de configuración de la base de datos
 require_once 'config.php';
 
 // Recibir los datos del formulario

@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const closeFormButton = document.getElementById('closeFormButton');
   const agendarModal = document.getElementById('agendarModal');
   
+  // Referencia para mostrar la duración
+  const duracionSesion = document.getElementById('duracionSesion');
+  
   // Función para generar las opciones de horas (de 08:00 a 21:00, cada 15 minutos)
   function generarOpcionesDeHora(timeDropdown, selectedTimeDisplay, hiddenTimeInput) {
     for (let hora = 8; hora <= 21; hora++) {
@@ -32,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
           selectedTimeDisplay.textContent = `${horaFormateada}:${minutoFormateado}`;
           hiddenTimeInput.value = `${horaFormateada}:${minutoFormateado}`;
           cerrarMenu(timeDropdown);
+          calcularDuracion(); // Llamar a la función de cálculo de duración
         });
         
         // Añadir opción al menú desplegable
@@ -48,6 +52,60 @@ document.addEventListener("DOMContentLoaded", function() {
   // Función para cerrar el menú desplegable
   function cerrarMenu(timePicker) {
     timePicker.classList.remove('active');
+  }
+  
+  // Función para calcular la duración entre dos horas
+  function calcularDuracion() {
+    const horaInicio = hiddenTimeInputInicio.value;
+    const horaFin = hiddenTimeInputFin.value;
+    
+    if (!horaInicio || !horaFin) {
+      return; // No se calculan los valores si no se han seleccionado ambos
+    }
+    
+    const [horaInicioHoras, horaInicioMinutos] = horaInicio.split(':').map(Number);
+    const [horaFinHoras, horaFinMinutos] = horaFin.split(':').map(Number);
+    
+    // Convertir horas y minutos a minutos totales para cada tiempo
+    const totalMinutosInicio = (horaInicioHoras * 60) + horaInicioMinutos;
+    const totalMinutosFin = (horaFinHoras * 60) + horaFinMinutos;
+    
+    // Si la hora de inicio es mayor que la de fin, no mostrar nada
+    if (totalMinutosInicio >= totalMinutosFin) {
+      duracionSesion.style.display = 'none';
+      return;
+    }
+    
+    const duracionMinutos = totalMinutosFin - totalMinutosInicio;
+    
+    // Calcular horas y minutos
+    const horas = Math.floor(duracionMinutos / 60);
+    const minutos = duracionMinutos % 60;
+    
+    // Crear el mensaje adecuado
+    let mensaje = 'La sesión durará ';
+    if (horas > 0) {
+      mensaje += `${horas} hora${horas > 1 ? 's' : ''}`;
+    }
+    if (minutos > 0 || horas === 0) { // Asegurar que se muestran los minutos incluso cuando hay 0 horas
+      if (horas > 0) {
+        mensaje += ' y ';
+      }
+      mensaje += `${minutos} minuto${minutos > 1 ? 's' : ''}`;
+    }
+    
+    // Mostrar el mensaje en el elemento <p>
+    duracionSesion.textContent = mensaje;
+    duracionSesion.style.display = 'block'; // Mostrar el texto
+  }
+  
+  // Función para resetear los valores de los time pickers
+  function resetTimePickers() {
+    hiddenTimeInputInicio.value = '';
+    hiddenTimeInputFin.value = '';
+    selectedTimeDisplayInicio.textContent = '--:--';
+    selectedTimeDisplayFin.textContent = '--:--';
+    duracionSesion.style.display = 'none'; // Ocultar el mensaje
   }
   
   // Eventos de clic para abrir los time pickers
@@ -74,12 +132,8 @@ document.addEventListener("DOMContentLoaded", function() {
   generarOpcionesDeHora(timeDropdownFin, selectedTimeDisplayFin, hiddenTimeInputFin);
   
   // Resetear los valores de hora cuando se cierra el formulario
-  closeFormButton.addEventListener('click', function() {
-    hiddenTimeInputInicio.value = '';
-    hiddenTimeInputFin.value = '';
-    selectedTimeDisplayInicio.textContent = '--:--';
-    selectedTimeDisplayFin.textContent = '--:--';
-  });
+  closeFormButton.addEventListener('click', resetTimePickers);
+  
+  // Exportar la función de reset (opcional, si la usas en otro lugar)
+  window.resetTimePickers = resetTimePickers;
 });
-
-// Error encontrado, en caso de éxito, no se limpian los valores.
