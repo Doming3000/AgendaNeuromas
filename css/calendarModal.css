@@ -30,59 +30,13 @@ hr {
     margin-bottom: 10px;
 }
 
-.agendarModal label {
-    display: block;
-    width: 100%;
-    text-align: left;
-    font-size: 16px;
-}
-
-.agendarModal select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    margin: 5px 0 10px 0;
-    width: 100%;
-}
-
-/* Botones */
-.buttonContainer {
-    display: flex;
-    justify-content: space-between;
-}
-
-.buttonContainer button, input[type="submit"] {
-    border-radius: 5px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.closeButton {
-    background-color: #e24747;
-}
-
-.submitButton {
-    background-color: #407fc2;
-}
-
-.closeButton:hover {
-    background-color: #ce3737;
-}
-
-/* ---- ---- ---- */
-
 /* Contenedor principal que agrupa ambos selectores uno al lado del otro */
 .timepickers-wrapper {
     display: flex;
     gap: 20px;
 }
 
-/* Contenedor de cada selector individual (con label encima) */
+/* Contenedor de cada selector */
 .timepickerContainer {
     display: flex;
     flex-direction: column;
@@ -98,7 +52,7 @@ hr {
 
 /* Estilos del área seleccionada */
 .selected-time {
-    background-color: #fff;
+    background-color: white;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -153,4 +107,45 @@ hr {
     font-size: 0.8rem;
     position: fixed;
     margin-top: -25px;
-}  
+}
+
+.agendarModal label {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+}
+
+.agendarModal .select2-container {
+    width: 100% !important;
+    margin: 5px 0 10px 0;
+    will-change: transform;
+}
+
+/* Botones */
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonContainer button, input[type="submit"] {
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.closeButton {
+    background-color: #e24747;
+}
+
+.submitButton {
+    background-color: #407fc2;
+}
+
+.closeButton:hover {
+    background-color: #ce3737;
+}

@@ -1,32 +1,55 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Al hacer clic en el botón de agendar, se resetean los formularios y se cargan los datos necesarios
   document.getElementById('agendarButton').addEventListener('click', function() {
-    
+    // Llamadas a funciones
     fetchPacientes();
     fetchProfesionales();
     
-    // Mostrar el modal de agendar
+    // Abrir el modal de agendar
     toggleModal('agendarModal', true);
   });
   
-  // Función para obtener los pacientes de la base de datos
+  // Función para inicializar select2
+  function initializeSelect2(selectId) {
+    $(`#${selectId}`).select2({
+      placeholder: "Seleccione una opción",
+      allowClear: false,
+    });
+  }
+  
+  // Función para limpiar y actualizar select con nuevas opciones
+  function updateSelectOptions(selectElement, options) {
+    selectElement.innerHTML = '';
+    const placeholderOption = document.createElement('option');
+    placeholderOption.value = '';
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    selectElement.appendChild(placeholderOption);
+    
+    options.forEach(optionData => {
+      const option = document.createElement('option');
+      option.value = optionData.id;
+      option.textContent = optionData.nombre;
+      selectElement.appendChild(option);
+    });
+    
+    // Verificar si select2 ya está inicializado
+    const selectId = selectElement.id;
+    if ($(`#${selectId}`).hasClass('select2-hidden-accessible')) {
+      $(`#${selectId}`).select2('destroy');
+    }
+    
+    initializeSelect2(selectId);
+  }
+  
+  // Función para obtener la lista de pacientes desde el servidor
   function fetchPacientes() {
     fetch('php/obtenerPacientes.php')
     .then(response => response.json())
     .then(data => {
       if (data.status === 'success') {
-        const pacientes = data.pacientes;
         const pacienteSelect = document.getElementById('paciente');
-        
-        // Limpiar las opciones existentes, excepto la primera
-        pacienteSelect.innerHTML = '<option value="none" disabled selected>Seleccione una opción</option>';
-        
-        // Agregar cada paciente como una opción en el select
-        pacientes.forEach(paciente => {
-          const option = document.createElement('option');
-          option.value = paciente.id;
-          option.textContent = paciente.nombre;
-          pacienteSelect.appendChild(option);
-        });
+        updateSelectOptions(pacienteSelect, data.pacientes);
       } else {
         console.error('Error al obtener los pacientes:', data.message);
       }
@@ -36,25 +59,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Función para obtener los profesionales de la base de datos
+  // Función para obtener la lista de profesionales desde el servidor
   function fetchProfesionales() {
     fetch('php/obtenerProfesionales.php')
     .then(response => response.json())
     .then(data => {
       if (data.status === 'success') {
-        const profesionales = data.profesionales;
         const profesionalSelect = document.getElementById('profesional');
-        
-        // Limpiar las opciones existentes, excepto la primera
-        profesionalSelect.innerHTML = '<option value="none" disabled selected>Seleccione una opción</option>';
-        
-        // Agregar cada profesional como una opción en el select
-        profesionales.forEach(profesional => {
-          const option = document.createElement('option');
-          option.value = profesional.id;
-          option.textContent = profesional.nombre;
-          profesionalSelect.appendChild(option);
-        });
+        updateSelectOptions(profesionalSelect, data.profesionales);
       } else {
         console.error('Error al obtener los profesionales:', data.message);
       }
@@ -64,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Función para controlar la visibilidad de los modales
+  // Función para mostrar u ocultar un modal
   function toggleModal(modalId, show) {
     document.getElementById(modalId).style.display = show ? 'block' : 'none';
   }

@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function generarOpcionesDeHora(timeDropdown, selectedTimeDisplay, hiddenTimeInput) {
     for (let hora = 8; hora <= 21; hora++) {
       for (let minuto = 0; minuto < 60; minuto += 15) {
-        if (hora === 21 && minuto > 0) break;
+        if (hora === 21 && minuto > 0) break; // Limitar a 21:00 horas máximo
         
         const horaFormateada = hora.toString().padStart(2, '0');
         const minutoFormateado = minuto.toString().padStart(2, '0');
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
           selectedTimeDisplay.textContent = `${horaFormateada}:${minutoFormateado}`;
           hiddenTimeInput.value = `${horaFormateada}:${minutoFormateado}`;
           cerrarMenu(timeDropdown);
-          calcularDuracion(); // Llamar a la función de cálculo de duración
+          calcularDuracion();
         });
         
         // Añadir opción al menú desplegable
@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const [horaInicioHoras, horaInicioMinutos] = horaInicio.split(':').map(Number);
     const [horaFinHoras, horaFinMinutos] = horaFin.split(':').map(Number);
     
-    // Convertir horas y minutos a minutos totales para cada tiempo
     const totalMinutosInicio = (horaInicioHoras * 60) + horaInicioMinutos;
     const totalMinutosFin = (horaFinHoras * 60) + horaFinMinutos;
     
@@ -77,26 +76,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     const duracionMinutos = totalMinutosFin - totalMinutosInicio;
-    
-    // Calcular horas y minutos
     const horas = Math.floor(duracionMinutos / 60);
     const minutos = duracionMinutos % 60;
     
-    // Crear el mensaje adecuado
     let mensaje = 'La sesión durará ';
     if (horas > 0) {
       mensaje += `${horas} hora${horas > 1 ? 's' : ''}`;
     }
-    if (minutos > 0 || horas === 0) { // Asegurar que se muestran los minutos incluso cuando hay 0 horas
+    if (minutos > 0 || horas === 0) {
       if (horas > 0) {
         mensaje += ' y ';
       }
       mensaje += `${minutos} minuto${minutos > 1 ? 's' : ''}`;
     }
     
-    // Mostrar el mensaje en el elemento <p>
+    // Actualiza el texto del elemento <p>
     duracionSesion.textContent = mensaje;
-    duracionSesion.style.display = 'block'; // Mostrar el texto
+    duracionSesion.style.display = 'block';
   }
   
   // Función para resetear los valores de los time pickers
@@ -105,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
     hiddenTimeInputFin.value = '';
     selectedTimeDisplayInicio.textContent = '--:--';
     selectedTimeDisplayFin.textContent = '--:--';
-    duracionSesion.style.display = 'none'; // Ocultar el mensaje
+    duracionSesion.style.display = 'none';
   }
   
   // Eventos de clic para abrir los time pickers
@@ -134,6 +130,6 @@ document.addEventListener("DOMContentLoaded", function() {
   // Resetear los valores de hora cuando se cierra el formulario
   closeFormButton.addEventListener('click', resetTimePickers);
   
-  // Exportar la función de reset (opcional, si la usas en otro lugar)
+  // Exportar la función de reset
   window.resetTimePickers = resetTimePickers;
 });

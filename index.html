@@ -17,8 +17,19 @@
     <script src="js/timepicker.js"></script>
     
     <!-- Dependencias -->
+    
+    <!-- Fullcalendar -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    
+    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/24f0e9fe41.js" crossorigin="anonymous"></script>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <!-- Select2 CSS y JS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 </head>
 <body>
     <header>
@@ -87,15 +98,11 @@
         
         <!-- Selector de paciente -->
         <label for="paciente">Nombre del paciente:</label>
-        <select id="paciente" name="paciente" required>
-            <option value="none" disabled selected>Seleccione una opción</option>
-        </select>
+        <select id="paciente" name="paciente"></select>
         
         <!-- Selector de profesional -->
         <label for="profesional">Profesional encargado:</label>
-        <select id="profesional" name="profesional" required>
-            <option value="none" disabled selected>Seleccione una opción</option>
-        </select>
+        <select id="profesional" name="profesional"></select>
         
         <!-- Contenedor de botones -->
         <div class="buttonContainer">
