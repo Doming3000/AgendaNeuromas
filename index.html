@@ -9,14 +9,17 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/calendar.css">
     <link rel="stylesheet" href="css/calendarModal.css">
+    <link rel="stylesheet" href="css/registrarPaciente.css">
     
     <!-- Javascript -->
-    <script src="js/calendar.js"></script>
-    <script src="js/calendarModal.js"></script>
-    <script src="js/modalSelect.js"></script>
-    <script src="js/timepicker.js"></script>
+    <script src="js/calendar.js"></script> <!-- Calendario -->
+    <script src="js/modals/agendarHora.js"></script>
+    <script src="js/modals/fechaSeleccionada.js"></script>
+    <script src="js/modals/formPaciente.js"></script>
+    <script src="js/modalSelects.js"></script> <!-- Lógica para los selects -->
+    <script src="js/timepicker.js"></script> <!-- Custom time pickers -->
     
-    <!-- Dependencias -->
+    <!-- Dependencias: -->
     
     <!-- Fullcalendar -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
@@ -100,6 +103,8 @@
         <label for="paciente">Nombre del paciente:</label>
         <select id="paciente" name="paciente"></select>
         
+        <!-- <span id="addPaciente" class="addPaciente">¿El paciente no está en la lista?</span> -->
+        
         <!-- Selector de profesional -->
         <label for="profesional">Profesional encargado:</label>
         <select id="profesional" name="profesional"></select>
@@ -108,6 +113,40 @@
         <div class="buttonContainer">
             <button class="closeButton" type="button" id="closeFormButton">Cancelar</button>
             <input class="submitButton" type="submit" value="Agendar">
+        </div>
+    </form>
+    
+    <!-- Formulario para registrar un paciente. -->
+    <form class="formPaciente" id="formPaciente" action="php/registrarPaciente.php" method="POST">
+        <h3>Registrar paciente</h3>
+        
+        <label for="nombre">Nombre del paciente:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" maxlength="50" required>
+        
+        <label for="rut">RUT del paciente:</label>
+        <input type="text" id="rut" name="rut" placeholder="Sin puntos con guion" maxlength="10" required>
+        
+        <label for="correo">Correo del paciente:</label>
+        <input type="email" id="correo" name="correo" placeholder="nombre@dominio.com" maxlength="320" required>
+        
+        <label for="telefono">Teléfono del paciente:</label>
+        <input type="text" id="telefono" name="telefono" placeholder="123456789" maxlength="9" required>
+        
+        <!-- Menú de selección de previsión -->
+        <label for="prevision">Previsión del paciente:</label>
+        <select id="prevision" name="prevision" required>
+            <option value="none" disabled selected>Seleccione una opción</option>
+            <option value="Fonasa">Fonasa</option>
+            <option value="Isapre">Isapre</option>
+            <option value="Particular">Particular</option>
+            <option value="Convenio">Convenio</option>
+        </select>
+        
+        <p>¿Necesitas ayuda?</p>
+        
+        <div class="buttonContainer">
+            <button class="closeButton" type="button" id="closeFormButton">Cancelar</button>
+            <input class="submitButton" type="submit" value="Registrar">
         </div>
     </form>
     

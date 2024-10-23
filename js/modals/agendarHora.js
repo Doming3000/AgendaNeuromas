@@ -1,51 +1,31 @@
-// Declaración de variables
-let selectedDate;
-let dateFormatted;
-
 document.addEventListener('DOMContentLoaded', function() {
-  
-  // Manejo de eventos personalizados
-  document.addEventListener('dateSelected', handleDateSelected);
-  
-  // Manejo de botones de interacción
-  document.getElementById('closeButton').addEventListener('click', closeModal);
+  // Botón de agendar
   document.getElementById('agendarButton').addEventListener('click', openAgendarModal);
+  
+  // Cerrar modal y formulario
   document.getElementById('closeFormButton').addEventListener('click', closeForm);
   
   // Envío del formulario
   document.getElementById('agendarModal').addEventListener('submit', handleFormSubmit);
   
-  // Funciones para manejo de eventos
-  function handleDateSelected(event) {
-    dateFormatted = event.detail.dateFormatted;
-    selectedDate = event.detail.date;
-    
-    // Mostrar overlay y modal con la fecha seleccionada
-    toggleOverlay(true);
-    toggleModal('fechaSeleccionada', true);
-    
-    // Mostrar la fecha seleccionada en el input y en el modal
-    const formattedDate = selectedDate.toISOString().split('T')[0];
-    document.getElementById('fecha').value = formattedDate;
-    document.querySelector('.fechaSeleccionada h3').textContent = dateFormatted;
-  }
-  
-  // Función para manejar la apertura del modal para agendar
+  // Función para abrir el modal de agendar
   function openAgendarModal() {
     toggleModal('fechaSeleccionada', false);
     toggleModal('agendarModal', true);
+    disableScroll(); // Deshabilitar el scroll al abrir el modal de agendar
     
+    // Mostrar la fecha seleccionada en el encabezado del modal
     document.querySelector('.agendarModal h3').textContent = `Agendar hora para el ${dateFormatted}`;
   }
   
-  // Manejar el envío del formulario de agendar
+  // Función para manejar el envío del formulario
   function handleFormSubmit(event) {
     event.preventDefault();
     
     const paciente = document.getElementById('paciente').value;
     const profesional = document.getElementById('profesional').value;
     
-    // Comprobar que los selects no estén vacíos
+    // Verificar que los campos select no estén vacíos
     if (paciente === '' || profesional === '') {
       alert('Debe completar todos los campos');
       return;
@@ -53,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const formData = new FormData(this);
     
-    // Enviar los datos del formulario al servidor
+    // Enviar el formulario al servidor
     fetch('php/agendarHora.php', {
       method: 'POST',
       body: formData
@@ -79,31 +59,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Funciones de control de modales y formularios
-  function closeModal() {
-    toggleOverlay(false);
-    toggleModal('fechaSeleccionada', false);
-  }
-  
+  // Función para cerrar el formulario y el modal de agendar
   function closeForm() {
     resetForms();
     resetTimePickers();
-    
-    document.getElementById('agendarModal').reset();
     toggleModal('agendarModal', false);
     toggleModal('fechaSeleccionada', true);
+    checkModals();
+    
+    document.getElementById('agendarModal').reset();
   }
   
+  // Función para deshabilitar el scroll en la página
+  function disableScroll() {
+    document.body.style.overflow = 'hidden';
+  }
+  
+  // Función para habilitar el scroll solo si ambos modales están cerrados
+  function checkModals() {
+    const isAgendarModalOpen = document.getElementById('agendarModal').style.display === 'block';
+    const isFechaModalOpen = document.getElementById('fechaSeleccionada').style.display === 'block';
+    
+    if (!isAgendarModalOpen && !isFechaModalOpen) {
+      enableScroll();
+    }
+  }
+  
+  // Función para resetear los formularios y select2
   function resetForms() {
     $('#paciente').val(null).trigger('change');
     $('#profesional').val(null).trigger('change');
   }
   
-  // Funciones auxiliares
-  function toggleOverlay(show) {
-    document.getElementById('overlay').style.display = show ? 'block' : 'none';
-  }
-  
+  // Función para mostrar u ocultar un modal
   function toggleModal(modalId, show) {
     document.getElementById(modalId).style.display = show ? 'block' : 'none';
   }

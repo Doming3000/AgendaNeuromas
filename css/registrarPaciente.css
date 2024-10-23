@@ -1,0 +1,54 @@
+/* Estilos generales para centrar el formulario */
+.formPaciente {
+    width: 400px; /* Establece un ancho fijo para el formulario */
+    margin: 100px auto; /* Centra el formulario horizontalmente y añade un margen superior */
+    padding: 20px; /* Añade un poco de espacio interno (padding) */
+    border: 1px solid #ccc; /* Borde sutil alrededor del formulario */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: white; /* Fondo claro */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra para un efecto sutil de profundidad */
+    user-select: none;
+}
+
+/* Alinear el texto de los labels y los inputs */
+.formPaciente label,
+.formPaciente input,
+.formPaciente select {
+    display: block;
+    width: 100%; /* Asegura que los elementos ocupen todo el ancho disponible */
+    text-align: left; /* Justifica el texto a la izquierda */
+    margin-bottom: 10px; /* Espacio entre los elementos */
+    font-size: 16px; /* Tamaño de fuente adecuado */
+}
+
+/* Ajuste para los inputs */
+.formPaciente input[type="text"],
+.formPaciente input[type="email"],
+.formPaciente select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Estilos para el botón de submit */
+.formPaciente input[type="submit"] {
+    background-color: #4CAF50; /* Color verde para el botón */
+    color: white; /* Texto en blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado del botón */
+    cursor: pointer; /* Cambia el cursor a puntero al pasar por el botón */
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Cambia el color al pasar sobre el botón */
+.formPaciente input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Ocultar la primera opción del menú de selección */
+.prevision option[value="0"] {
+    display: none;
+}

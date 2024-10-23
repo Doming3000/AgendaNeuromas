@@ -12,7 +12,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     user-select: none;
-    width: 460px;
+    width: 520px;
     z-index: 3;
 }
 
@@ -20,10 +20,6 @@
     color: #333;
     font-size: 1.25rem;
     margin-bottom: 10px;
-}
-
-hr {
-    margin: 10px 0 10px 0;
 }
 
 .horaContainer {
@@ -120,6 +116,39 @@ hr {
     width: 100% !important;
     margin: 5px 0 10px 0;
     will-change: transform;
+}
+
+/* Estilos del contenedor de Select2 */
+.agendarModal .select2-container--default .select2-selection--single {
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    padding: 5px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+    transition: border-color 0.3s ease;
+}
+
+/* Flecha del selector en Select2 */
+.agendarModal .select2-container--default .select2-selection__arrow {
+    display: flex;
+    align-items: center;  /* Centra verticalmente la flecha */
+    justify-content: center;
+    height: 100%;  /* Asegura que ocupe todo el contenedor */
+}
+
+/* Flecha del selector en Select2 más visible */
+.agendarModal .select2-container--default .select2-selection__arrow b {
+    border-color: #333 transparent transparent transparent; /* Color de la flecha */
+    border-width: 5px 4px 0 4px;  /* Tamaño y forma de la flecha */
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.addPaciente {
+    font-size: 0.8rem;
+    cursor: pointer;
 }
 
 /* Botones */
