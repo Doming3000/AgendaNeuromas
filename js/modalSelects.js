@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Inicializa select2 para los selectores al cargar la página
+  initializeSelect2('paciente');
+  initializeSelect2('profesional');
+  
   // Al hacer clic en el botón de agendar, se resetean los formularios y se cargan los datos necesarios
   document.getElementById('agendarButton').addEventListener('click', function() {
-    // Llamadas a funciones
+    // Llamadas a funciones para actualizar opciones
     fetchPacientes();
     fetchProfesionales();
     
@@ -9,23 +13,28 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleModal('agendarModal', true);
   });
   
-  // Función para inicializar select2
+  // Función para inicializar select2 (sin destrucción)
   function initializeSelect2(selectId) {
     $(`#${selectId}`).select2({
       placeholder: "Seleccione una opción",
-      allowClear: false,
+      width: '100%'
     });
   }
   
-  // Función para limpiar y actualizar select con nuevas opciones
+  // Función para limpiar y actualizar el select con nuevas opciones
   function updateSelectOptions(selectElement, options) {
+    // Limpiar opciones actuales
     selectElement.innerHTML = '';
+    
+    // Agrega una opción de marcador de posición
     const placeholderOption = document.createElement('option');
     placeholderOption.value = '';
     placeholderOption.disabled = true;
     placeholderOption.selected = true;
+    placeholderOption.textContent = "Seleccione una opción";
     selectElement.appendChild(placeholderOption);
     
+    // Agrega las nuevas opciones
     options.forEach(optionData => {
       const option = document.createElement('option');
       option.value = optionData.id;
@@ -33,13 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
       selectElement.appendChild(option);
     });
     
-    // Verificar si select2 ya está inicializado
-    const selectId = selectElement.id;
-    if ($(`#${selectId}`).hasClass('select2-hidden-accessible')) {
-      $(`#${selectId}`).select2('destroy');
-    }
-    
-    initializeSelect2(selectId);
+    // Refresca select2 para reflejar los cambios
+    $(`#${selectElement.id}`).trigger('change');
   }
   
   // Función para obtener la lista de pacientes desde el servidor

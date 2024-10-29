@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function openAgendarModal() {
     toggleModal('fechaSeleccionada', false);
     toggleModal('agendarModal', true);
+    iniciarTimePickers();
     disableScroll(); // Deshabilitar el scroll al abrir el modal de agendar
     
     // Mostrar la fecha seleccionada en el encabezado del modal

@@ -41,43 +41,43 @@
 
 /* Selector personalizado de hora */
 .custom-time-picker {
+    margin-bottom: 30px;
     position: relative;
     width: 90%;
-    margin-bottom: 30px;
 }
 
 /* Estilos del área seleccionada */
 .selected-time {
+    align-items: center;
     background-color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    border: 1px solid #ccc;
     cursor: pointer;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    justify-content: space-between;
     margin-top: 5px;
+    padding: 10px;
+    transition: border-color 0.3s ease;
 }
 
 /* Desplegable de selección de horas */
 .time-dropdown {
-    display: none;
-    position: absolute;
     background-color: white;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    border: 1px solid #ccc;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
     max-height: 200px;
     overflow-y: auto;
-    z-index: 10;
+    position: absolute;
     width: 100%;
+    z-index: 10;
 }
 
 .time-option {
-    padding: 10px;
     cursor: pointer;
+    padding: 10px;
     text-align: center;
 }
 
@@ -87,8 +87,8 @@
 }
 
 .arrow {
-    margin-left: 10px;
     font-size: 0.8rem;
+    margin-left: 10px;
 }
 
 .custom-time-picker.active .time-dropdown {
@@ -107,9 +107,9 @@
 
 .agendarModal label {
     display: block;
-    width: 100%;
-    text-align: left;
     font-size: 16px;
+    text-align: left;
+    width: 100%;
 }
 
 .agendarModal .select2-container {
@@ -120,35 +120,30 @@
 
 /* Estilos del contenedor de Select2 */
 .agendarModal .select2-container--default .select2-selection--single {
-    display: flex;
-    align-items: center; /* Centra verticalmente el contenido */
-    padding: 5px;
+    align-items: center;
     background-color: white;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
     height: 40px;
+    padding: 5px;
     transition: border-color 0.3s ease;
 }
 
 /* Flecha del selector en Select2 */
 .agendarModal .select2-container--default .select2-selection__arrow {
+    align-items: center;
     display: flex;
-    align-items: center;  /* Centra verticalmente la flecha */
+    height: 100% !important;
     justify-content: center;
-    height: 100%;  /* Asegura que ocupe todo el contenedor */
 }
 
 /* Flecha del selector en Select2 más visible */
 .agendarModal .select2-container--default .select2-selection__arrow b {
-    border-color: #333 transparent transparent transparent; /* Color de la flecha */
-    border-width: 5px 4px 0 4px;  /* Tamaño y forma de la flecha */
-    margin-left: 10px;
+    border-color: #333 transparent transparent transparent;
+    border-width: 5px 4px 0 4px;
     display: inline-block;
-}
-
-.addPaciente {
-    font-size: 0.8rem;
-    cursor: pointer;
+    margin-left: 10px;
 }
 
 /* Botones */

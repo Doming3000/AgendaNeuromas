@@ -13,16 +13,43 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // Botón de cierre del formulario
   const closeFormButton = document.getElementById('closeFormButton');
-  const agendarModal = document.getElementById('agendarModal');
   
   // Referencia para mostrar la duración
   const duracionSesion = document.getElementById('duracionSesion');
   
   // Función para generar las opciones de horas (de 08:00 a 21:00, cada 15 minutos)
   function generarOpcionesDeHora(timeDropdown, selectedTimeDisplay, hiddenTimeInput) {
-    for (let hora = 8; hora <= 21; hora++) {
-      for (let minuto = 0; minuto < 60; minuto += 15) {
-        if (hora === 21 && minuto > 0) break; // Limitar a 21:00 horas máximo
+    // Limpiar el menú desplegable para evitar la duplicación de opciones
+    timeDropdown.innerHTML = ""; 
+    
+    // Obtener fecha y hora actuales
+    const now = new Date();
+    
+    let startHour = 8;
+    let startMinute = 0;
+    
+    // Verificar si la fecha seleccionada es hoy
+    const isToday = selectedDate &&
+    selectedDate.getDate() === now.getDate() &&
+    selectedDate.getMonth() === now.getMonth() &&
+    selectedDate.getFullYear() === now.getFullYear();
+    
+    // Si es hoy, ajusta la hora de inicio al siguiente múltiplo de 15 minutos
+    if (isToday) {
+      startHour = now.getHours();
+      startMinute = Math.ceil(now.getMinutes() / 15) * 15;
+      
+      // Ajuste si startMinute llega a 60
+      if (startMinute === 60) {
+        startHour += 1;
+        startMinute = 0;
+      }
+    }
+    
+    // Generar opciones de horas desde la hora de inicio calculada
+    for (let hora = startHour; hora <= 21; hora++) {
+      for (let minuto = (hora === startHour ? startMinute : 0); minuto < 60; minuto += 15) {
+        if (hora === 21 && minuto > 0) break; // Limitar a 21:00 horas como máximo
         
         const horaFormateada = hora.toString().padStart(2, '0');
         const minutoFormateado = minuto.toString().padStart(2, '0');
@@ -45,8 +72,13 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   
   // Función para alternar la visibilidad del menú desplegable
-  function toggleMenu(timePicker) {
+  function toggleMenu(timePicker, timeDropdown) {
     timePicker.classList.toggle('active');
+    
+    if (timePicker.classList.contains('active')) {
+      // Reinicia el scroll del menú al abrirlo
+      timeDropdown.scrollTop = 0;
+    }
   }
   
   // Función para cerrar el menú desplegable
@@ -59,8 +91,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const horaInicio = hiddenTimeInputInicio.value;
     const horaFin = hiddenTimeInputFin.value;
     
+    // Evitar calcular los valores si no se han seleccionado ambos
     if (!horaInicio || !horaFin) {
-      return; // No se calculan los valores si no se han seleccionado ambos
+      return;
     }
     
     const [horaInicioHoras, horaInicioMinutos] = horaInicio.split(':').map(Number);
@@ -104,13 +137,13 @@ document.addEventListener("DOMContentLoaded", function() {
     duracionSesion.style.display = 'none';
   }
   
-  // Eventos de clic para abrir los time pickers
+  // Eventos de clic para abrir los time pickers y resetear scroll
   timePickerInicio.addEventListener('click', function() {
-    toggleMenu(timePickerInicio);
+    toggleMenu(timePickerInicio, timeDropdownInicio);
   });
   
   timePickerFin.addEventListener('click', function() {
-    toggleMenu(timePickerFin);
+    toggleMenu(timePickerFin, timeDropdownFin);
   });
   
   // Cerrar los menús si se hace clic fuera de ellos
@@ -123,13 +156,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
   
-  // Generar las opciones de hora para ambos time pickers
-  generarOpcionesDeHora(timeDropdownInicio, selectedTimeDisplayInicio, hiddenTimeInputInicio);
-  generarOpcionesDeHora(timeDropdownFin, selectedTimeDisplayFin, hiddenTimeInputFin);
+  // Función para inicializar time pickers al abrir el modal
+  function iniciarTimePickers() {
+    generarOpcionesDeHora(timeDropdownInicio, selectedTimeDisplayInicio, hiddenTimeInputInicio);
+    generarOpcionesDeHora(timeDropdownFin, selectedTimeDisplayFin, hiddenTimeInputFin);
+  }
   
   // Resetear los valores de hora cuando se cierra el formulario
   closeFormButton.addEventListener('click', resetTimePickers);
   
-  // Exportar la función de reset
+  // Exportar funciones a nivel global
+  window.iniciarTimePickers = iniciarTimePickers;
   window.resetTimePickers = resetTimePickers;
 });
