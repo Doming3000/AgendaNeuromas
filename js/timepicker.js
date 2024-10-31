@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
   // Referencia para mostrar la duración
   const duracionSesion = document.getElementById('duracionSesion');
   
-  // Función para generar las opciones de horas (de 08:00 a 21:00, cada 15 minutos)
   function generarOpcionesDeHora(timeDropdown, selectedTimeDisplay, hiddenTimeInput) {
     // Limpiar el menú desplegable para evitar la duplicación de opciones
     timeDropdown.innerHTML = ""; 
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
     selectedDate.getFullYear() === now.getFullYear();
     
     // Si es hoy, ajusta la hora de inicio al siguiente múltiplo de 15 minutos
-    if (isToday) {
+    if (isToday && now.getHours() >= 8) {
       startHour = now.getHours();
       startMinute = Math.ceil(now.getMinutes() / 15) * 15;
       
@@ -69,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
         timeDropdown.appendChild(opcion);
       }
     }
-  }
+  }  
   
   // Función para alternar la visibilidad del menú desplegable
   function toggleMenu(timePicker, timeDropdown) {
