@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleModal('fechaSeleccionada', false);
     toggleModal('agendarModal', true);
     iniciarTimePickers();
-    disableScroll(); // Deshabilitar el scroll al abrir el modal de agendar
+    disableScroll();
     
     // Mostrar la fecha seleccionada en el encabezado del modal
     document.querySelector('.agendarModal h3').textContent = `Agendar hora para el ${dateFormatted}`;
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    const formData = new FormData(this);
+    const formData = new FormData(event.target);
     
     // Enviar el formulario al servidor
     fetch('php/agendarHora.php', {
@@ -50,6 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Hora agendada con éxito');
         closeForm();
         resetTimePickers();
+        
+        // Emitir el evento "horaAgendada" con la fecha seleccionada
+        const horaAgendadaEvent = new CustomEvent("horaAgendada", { detail: { fecha: selectedDate.toISOString().split('T')[0] } });
+        document.dispatchEvent(horaAgendadaEvent);
       } else {
         alert(data.message);
       }

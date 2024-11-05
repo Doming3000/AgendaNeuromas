@@ -23,7 +23,15 @@
 }
 
 .horaContainer {
+    display: grid;
     margin-bottom: 10px;
+    gap: 10px;
+}
+
+.horaContainer span {
+    border: 1px solid #888;
+    padding: 5px;
+    border-radius: 2px;
 }
 
 /* Contenedor principal que agrupa ambos selectores uno al lado del otro */
@@ -172,4 +180,9 @@
 
 .closeButton:hover {
     background-color: #ce3737;
+}
+
+.addPaciente {
+    margin-top: 0;
+    font-size: 0.8rem;
 }

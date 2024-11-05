@@ -1,6 +1,6 @@
 - Pendiente a realizar:
 #   Formulario para ingresar pacientes al sistema
-#   Vista previa de horas por día
+#   Vista previa de horas por día en el calendario
 #   Servicios por profesional
 
 <!-- --- -->
