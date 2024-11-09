@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchPacientes();
     fetchProfesionales();
     
+    // Llamar a funciones tras escuchar evento de paciente registrado
+    document.addEventListener('pacienteRegistrado', fetchPacientes);
+    
     // Abrir el modal de agendar
     toggleModal('agendarModal', true);
   });

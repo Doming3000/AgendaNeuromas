@@ -100,4 +100,34 @@ document.addEventListener('DOMContentLoaded', function() {
   function toggleModal(modalId, show) {
     document.getElementById(modalId).style.display = show ? 'block' : 'none';
   }
+  
+  // Escuchar el evento click del span "¿El paciente no está en la lista?"
+  const addPacienteButton = document.getElementById('addPaciente');
+  const closeFormPacienteButton = document.getElementById('closeFormPacienteButton');
+  
+  // Verificar si el botón de añadir paciente existe antes de añadir el listener
+  if (addPacienteButton) {
+    addPacienteButton.addEventListener('click', function () {
+      toggleModal('agendarModal', false);
+      toggleModal('formPaciente', true);
+      resetForms();
+      resetTimePickers();
+      disableScroll();
+    });
+  }
+  
+  // Verificar si el botón de cerrar formulario de paciente existe antes de añadir el listener
+  if (closeFormPacienteButton) {
+    closeFormPacienteButton.addEventListener('click', function () {
+      closeFormPaciente();
+    });
+  }
+  
+  // Función para cerrar el formulario de paciente y regresar al modal anterior
+  function closeFormPaciente() {
+    toggleModal('formPaciente', false);
+    toggleModal('agendarModal', true);
+    checkModals();
+    document.getElementById('formPaciente').reset();
+  }
 });

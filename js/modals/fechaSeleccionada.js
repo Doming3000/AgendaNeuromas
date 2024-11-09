@@ -83,12 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
   function checkModals() {
     const isAgendarModalOpen = document.getElementById('agendarModal').style.display === 'block';
     const isFechaModalOpen = document.getElementById('fechaSeleccionada').style.display === 'block';
-    
-    if (!isAgendarModalOpen && !isFechaModalOpen) {
+    const isPacienteModalOpen = document.getElementById('formPaciente').style.display === 'block';
+  
+    if (!isAgendarModalOpen && !isFechaModalOpen && !isPacienteModalOpen) {
       enableScroll();
     }
   }
-  
+    
   // Función para habilitar el scroll en la página
   function enableScroll() {
     document.body.style.overflow = 'auto';
