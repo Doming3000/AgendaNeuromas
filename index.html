@@ -8,7 +8,8 @@
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/calendar.css">
-    <link rel="stylesheet" href="css/calendarModal.css">
+    <link rel="stylesheet" href="css/calendarModals.css">
+    <link rel="stylesheet" href="css/customSelects.css">
     <link rel="stylesheet" href="css/registrarPaciente.css">
     
     <!-- Javascript -->
@@ -60,52 +61,62 @@
     <form class="agendarModal" id="agendarModal" action="php/agendarHora.php" method="POST">
         <h3>Fecha</h3>
         
-        <!-- Input oculto para la fecha (Manejado mediante variables) -->
-        <input type="hidden" id="fecha" name="fecha">
-        
-        <div class="timepickers-wrapper">
-            <div class="timepickerContainer">
-                <!-- Selector personalizado de hora de inicio -->
-                <label for="customTimePickerInicio">Hora de inicio:</label>
-                <div id="customTimePickerInicio" class="custom-time-picker">
-                    <div class="selected-time">
-                        <span id="selectedTimeDisplayInicio">--:--</span>
-                        <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
+        <div class="selectorHoraBox">
+            <label>Seleccione la duración de la sesión</label>
+            <!-- Input oculto para la fecha (Manejado mediante variables) -->
+            <input type="hidden" id="fecha" name="fecha">
+            
+            <div class="timepickers-wrapper">
+                <div class="timepickerContainer">
+                    <!-- Selector personalizado de hora de inicio -->
+                    <label for="customTimePickerInicio">Hora de inicio:</label>
+                    <div id="customTimePickerInicio" class="custom-time-picker">
+                        <div class="selected-time">
+                            <span id="selectedTimeDisplayInicio">--:--</span>
+                            <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <div class="time-dropdown" id="timeDropdownInicio"></div>
                     </div>
-                    <div class="time-dropdown" id="timeDropdownInicio"></div>
+                    
+                    <!-- Input oculto para la hora de inicio (manejado mediante js) -->
+                    <input type="hidden" id="horaInicio" name="horaInicio">
                 </div>
                 
-                <!-- Input oculto para la hora de inicio (manejado mediante js) -->
-                <input type="hidden" id="horaInicio" name="horaInicio">
+                <div class="timepickerContainer">
+                    <!-- Selector personalizado de hora de fin -->
+                    <label for="customTimePickerFin">Hora de fin:</label>
+                    <div id="customTimePickerFin" class="custom-time-picker">
+                        <div class="selected-time">
+                            <span id="selectedTimeDisplayFin">--:--</span>
+                            <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <div class="time-dropdown" id="timeDropdownFin"></div>
+                    </div>
+                    
+                    <!-- Input oculto para la hora de fin (manejado mediante js)-->
+                    <input type="hidden" id="horaFin" name="horaFin">
+                </div>
             </div>
             
-            <div class="timepickerContainer">
-                <!-- Selector personalizado de hora de fin -->
-                <label for="customTimePickerFin">Hora de fin:</label>
-                <div id="customTimePickerFin" class="custom-time-picker">
-                    <div class="selected-time">
-                        <span id="selectedTimeDisplayFin">--:--</span>
-                        <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
-                    </div>
-                    <div class="time-dropdown" id="timeDropdownFin"></div>
-                </div>
-                
-                <!-- Input oculto para la hora de fin (manejado mediante js)-->
-                <input type="hidden" id="horaFin" name="horaFin">
-            </div>
+            <p id="duracionSesion" style="display: none;"></p>
         </div>
         
-        <p id="duracionSesion" style="display: none;"></p>
+        <div class="selectorPacienteBox">
+            <!-- Selector de paciente -->
+            <label for="paciente">Nombre del paciente:</label>
+            <select id="paciente" name="paciente"></select>
+            
+            <button type="button" title="Registrar un paciente" id="addPaciente" class="addPaciente">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>¿El paciente no está en la lista?</span>
+            </button>
+        </div>
         
-        <!-- Selector de paciente -->
-        <label for="paciente">Nombre del paciente:</label>
-        <select id="paciente" name="paciente"></select>
-        
-        <span id="addPaciente" class="addPaciente">¿El paciente no está en la lista?</span>
-        
-        <!-- Selector de profesional -->
-        <label for="profesional">Profesional encargado:</label>
-        <select id="profesional" name="profesional"></select>
+        <div class="selectorProfesionalBox">
+            <!-- Selector de profesional -->
+            <label for="profesional">Profesional encargado:</label>
+            <select id="profesional" name="profesional"></select>
+        </div>
         
         <!-- Contenedor de botones -->
         <div class="buttonContainer">
