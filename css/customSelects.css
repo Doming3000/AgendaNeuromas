@@ -59,9 +59,9 @@
     display: none;
     max-height: 200px;
     overflow-y: auto;
-    position: absolute;
-    width: 100%;
-    z-index: 10;
+    position: fixed;
+    width: 21%;
+    z-index: 1;
 }
 
 .time-option {

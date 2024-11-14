@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($sql_check_rut);
     
     if ($result->num_rows > 0) {
-        echo json_encode(["status" => "error", "message" => "El RUT ya está registrado."]);
+        echo json_encode(["status" => "error", "message" => "Este paciente ya está registrado."]);
         exit;
     }
     

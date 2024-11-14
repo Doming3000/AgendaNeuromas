@@ -47,8 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
           horaContainer.appendChild(horaElement);
         });
       } else {
-        // Mensaje si no hay horas agendadas para hoy
-        horaContainer.innerHTML = '<p>No tienes nada para este día</p>';
+        // Verificar si la fecha seleccionada es hoy
+        const hoy = new Date();
+        const fechaHoy = hoy.toISOString().slice(0, 10);
+        
+        const mensaje = (fechaSeleccionada === fechaHoy) 
+        ? 'No tienes nada para hoy' 
+        : 'No tienes nada para este día';
+        
+        horaContainer.innerHTML = `<p>${mensaje}</p>`;
       }
       
       // Mostrar overlay y modal solo después de cargar las horas
@@ -84,12 +91,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const isAgendarModalOpen = document.getElementById('agendarModal').style.display === 'block';
     const isFechaModalOpen = document.getElementById('fechaSeleccionada').style.display === 'block';
     const isPacienteModalOpen = document.getElementById('formPaciente').style.display === 'block';
-  
+    
     if (!isAgendarModalOpen && !isFechaModalOpen && !isPacienteModalOpen) {
       enableScroll();
     }
   }
-    
+  
   // Función para habilitar el scroll en la página
   function enableScroll() {
     document.body.style.overflow = 'auto';
