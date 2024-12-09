@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/registrarPaciente.css">
     
     <!-- Javascript -->
+    <script src="js/main.js"></script>
     <script src="js/calendar.js"></script> <!-- Calendario -->
     <script src="js/modals/agendarHora.js"></script>
     <script src="js/modals/fechaSeleccionada.js"></script>
@@ -62,7 +63,7 @@
         <h3>Fecha</h3>
         
         <div class="selectorHoraBox">
-            <label>Seleccione la duración de la sesión</label>
+            <span>Seleccione la duración de la sesión</span>
             <!-- Input oculto para la fecha (Manejado mediante variables) -->
             <input type="hidden" id="fecha" name="fecha">
             
@@ -118,6 +119,14 @@
             <select id="profesional" name="profesional"></select>
         </div>
         
+        <div class="selectorServicioBox">
+            <!-- Selector de servicio -->
+            <label for="servicio">Servicio a realizar:</label>
+            <select id="servicio" name="servicio">
+                <option value="none">Seleccione una opción</option>
+            </select>
+        </div>
+        
         <!-- Contenedor de botones -->
         <div class="buttonContainer">
             <button class="closeButton" type="button" id="closeFormButton">Cancelar</button>
@@ -159,9 +168,7 @@
         </div>
     </form>
     
-    <div class="horarioContainer">
-        <p>No tienes nada para hoy</p>
-    </div>z
+    <div class="horarioContainer"></div>
     
     <!-- Calendario -->
     <div class="calendar" id='calendar'></div>

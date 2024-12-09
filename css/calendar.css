@@ -6,6 +6,13 @@
     user-select: none;
 }
 
+/* Sobrescribe el estilo del día actual */
+.fc-day-today {
+    background-color: transparent !important; /* Quita el color de fondo */
+    color: inherit; /* Opcional: Asegúrate de que el color del texto no se altere */
+    border: none; /* Opcional: Quita cualquier borde si aplica */
+  }
+  
 /* Por cada celda */
 .fc-daygrid-day:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -26,4 +33,17 @@
 
 .fc-timegrid-slot {
     transition: background-color 0.3s ease;
+}
+
+/* Formato */
+.fc-toolbar-title {
+    text-transform: capitalize;
+}
+
+.fc-col-header-cell-cushion {
+    text-transform: capitalize;
+}
+
+.fc-event {
+    pointer-events: none;
 }

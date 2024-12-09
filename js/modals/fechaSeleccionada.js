@@ -27,9 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
   function obtenerhoras(fechaSeleccionada) {
     const horaContainer = document.querySelector('.horaContainer');
     
-    // Mostrar un mensaje de carga mientras se obtienen las horas
-    horaContainer.innerHTML = '<p>Cargando horas...</p>';
+    // Mostrar overlay y modal
+    toggleOverlay(true);
+    toggleModal('fechaSeleccionada', true);
+    disableScroll();
     
+    // Mostrar un mensaje de carga mientras se obtienen las horas
+    horaContainer.innerHTML = '<p>Consultando horas...</p>';
+    
+    // Llamar a la función para obtener y mostrar las horas de la fecha seleccionada
     fetch(`php/obtenerHoras.php?fecha=${fechaSeleccionada}`)
     .then(response => response.json())
     .then(data => {
@@ -57,15 +63,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         horaContainer.innerHTML = `<p>${mensaje}</p>`;
       }
-      
-      // Mostrar overlay y modal solo después de cargar las horas
-      toggleOverlay(true);
-      toggleModal('fechaSeleccionada', true);
-      disableScroll();
     })
     .catch(error => {
       console.error('Error al obtener las horas:', error);
-      horaContainer.innerHTML = '<p>Error al cargar las horas.</p>';
+      horaContainer.innerHTML = '<p>Ha ocurrido un error al cargar las horas.</p>';
     });
   }
   

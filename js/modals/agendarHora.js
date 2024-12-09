@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Hora agendada con éxito');
         closeForm();
         resetTimePickers();
+        actualizarCalendario();
+        listarHorasDeHoy();
         
         // Emitir el evento "horaAgendada" con la fecha seleccionada
         const horaAgendadaEvent = new CustomEvent("horaAgendada", { detail: { fecha: selectedDate.toISOString().split('T')[0] } });

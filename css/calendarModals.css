@@ -60,7 +60,7 @@
 
 /* ----------------------------------- */
 
-.horaContainer, .selectorHoraBox, .selectorPacienteBox, .selectorProfesionalBox {
+.horaContainer, .selectorHoraBox, .selectorPacienteBox, .selectorProfesionalBox, .selectorServicioBox {
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
@@ -68,7 +68,11 @@
     padding: 15px;
 }
 
-.horaContainer, .selectorHoraBox, .selectorProfesionalBox {
+.selectorPacienteBox {
+    margin-bottom: 10px;
+}
+
+.horaContainer, .selectorHoraBox, .selectorServicioBox {
     margin-top: 10px;
     margin-bottom: 10px;
 }
